@@ -1,9 +1,42 @@
-This folder contains the notebooks used to: 
-1. Feature-Engineering data 
-2. Cross-validation
-3. Model-training & Evaluation
+## A. Impute Missing Values Design: 
 
-## B. Cross-Validation: 
+This dataset of the project contains over 50% records have missing values. Trying to design the impute method to handle this missing values instead of normal method: 
+
+The algorithm follows a structured approach with the following key steps:
+
+#### Step 1: Identify Features with Missing Values
+
+Scan the dataset to detect which features contain missing values.
+
+#### Step 2: Determine Valid Predictor Features
+
+Identify features that have enough available data to be useful in predicting missing values.
+
+Exclude features where the fraction of missing data is too high.
+
+#### Step 3: Train Predictive Models for Imputation
+
+Select appropriate predictor features for each missing-value feature.
+
+Train a machine learning model using available data.
+
+If a model cannot be trained due to insufficient data, compute the mean value of the feature for fallback imputation.
+
+#### Step 4:  Apply Imputation on Missing Values
+
+For each missing value:
+
+If a trained model exists, use it to predict and fill in the missing value.
+
+If no valid model is available, use the precomputed mean value instead.
+
+#### Step 5: Output the Imputed Dataset
+
+The algorithm returns a dataset where missing values have been replaced using either machine learning predictions or mean imputation.
+
+
+
+## B. Cross-Validation Design: 
 
 Cross-validation strategy designed to optimize classification thresholds for the 'sii' label column, derived from binning a continuous numeric column 'PCIAT-PCIAT_Total'. The strategy leverages k-fold cross-validation, threshold optimization using the Powell method, and evaluates performance using Cohen's kappa score
 
